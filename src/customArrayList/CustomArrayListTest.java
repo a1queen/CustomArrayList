@@ -2,6 +2,7 @@ package customArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -223,8 +224,10 @@ class CustomArrayListTest {
 
 	@Test
 	void ExceptionRemoveElementFromEmptyList() {
-		CustomArrayList<Integer> array = new CustomArrayList<>();
-		array.remove(0);
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			CustomArrayList<Integer> array = new CustomArrayList<>();
+			array.remove(0);
+		});
 	}
 
 	@Test
@@ -249,12 +252,14 @@ class CustomArrayListTest {
 
 	@Test
 	void ExceptionRemoveElementOutOfRange() {
-		CustomArrayList<Integer> array = new CustomArrayList<>();
-		array.add(5);
-		array.add(7);
-		array.add(null);
-		array.add(5);
-		array.remove(4);
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			CustomArrayList<Integer> array = new CustomArrayList<>();
+			array.add(5);
+			array.add(7);
+			array.add(null);
+			array.add(5);
+			array.remove(4);
+		});
 	}
 
 	@Test
@@ -316,8 +321,10 @@ class CustomArrayListTest {
 
 	@Test
 	void ExceptionSetOutOfBounds() {
-		CustomArrayList<Integer> array = new CustomArrayList<>();
-		array.set(0, null);
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			CustomArrayList<Integer> array = new CustomArrayList<>();
+			array.set(0, null);
+		});
 	}
 
 	@Test
@@ -440,11 +447,15 @@ class CustomArrayListTest {
 
 	@Test
 	void ExceptionAddElementOutOfBound() {
-		CustomArrayList<Integer> array = new CustomArrayList<>();
-		array.add(3);
-		array.add(null);
-		array.add(5);
-		array.add(8, 2);
+
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			CustomArrayList<Integer> array = new CustomArrayList<>();
+			array.add(3);
+			array.add(null);
+			array.add(5);
+			array.add(8, 2);
+		});
+
 	}
 
 //toarray testy
@@ -638,18 +649,20 @@ class CustomArrayListTest {
 
 	@Test
 	void ExceptionAddAllOutOfTheBounds() {
-		CustomArrayList<Integer> array = new CustomArrayList<>();
-		array.add(3);
-		array.add(null);
-		array.add(5);
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			CustomArrayList<Integer> array = new CustomArrayList<>();
+			array.add(3);
+			array.add(null);
+			array.add(5);
 
-		CustomArrayList<Integer> givenArray = new CustomArrayList<>();
-		givenArray.add(3);
-		givenArray.add(null);
-		givenArray.add(5);
-		givenArray.add(7);
+			CustomArrayList<Integer> givenArray = new CustomArrayList<>();
+			givenArray.add(3);
+			givenArray.add(null);
+			givenArray.add(5);
+			givenArray.add(7);
 
-		assertFalse(array.addAll(8, givenArray));
+			assertFalse(array.addAll(8, givenArray));
+		});
 	}
 
 	@Test
